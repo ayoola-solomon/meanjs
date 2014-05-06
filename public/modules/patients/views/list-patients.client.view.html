@@ -3,12 +3,13 @@
         <h1>Patients</h1>
     </div>
     <div class="list-group">
-        <a data-ng-repeat="patient in patients" data-ng-href="#!/patients/{{patient._id}}" class="list-group-item">
-            <small class="list-group-item-text">{{patient.created | date:'medium'}} / {{patient.user.displayName}}</small>
-            <h4 class="list-group-item-heading">{{patient.name}}</h4>
+        <a data-ng-repeat="patient in patients" data-ng-href="#!/patients/{{patient.id}}" class="list-group-item">
+            <small class="list-group-item-text">{{patient.birthDate | date:'medium'}} / {{patient.fullName}}</small>
+            <h4 class="list-group-item-heading">{{patient.fullName}}</h4>
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!patients.$resolved || patients.length">
     	No Patients yet, why don't you <a href="/#!/patients/create">create one</a>?
     </div>
 </section>
+

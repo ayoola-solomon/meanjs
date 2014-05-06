@@ -1,16 +1,17 @@
 <section data-ng-controller="PatientsController" data-ng-init="findOne()">
-	<div class="page-header">
-		<h1>{{patient.name}}</h1>
-	</div>
-	<div class="pull-right" data-ng-show="authentication.user._id == patient.user._id">
-		<a class="btn btn-primary" href="/#!/patients/{{patient._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
-	</div>
-	<small>
-		<em class="text-muted">Posted on {{patient.created | date:'mediumDate'}} by {{patient.user.displayName}}</em>
-	</small>
+    <div class="page-header">
+        <h1>{{patient.fullName}}</h1>
+    </div>
+    <div class="pull-right">
+        <a class="btn btn-primary" href="/#!/patients/{{patient.id}}/edit">
+            <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn btn-primary" data-ng-click="remove(patient);">
+            <i class="glyphicon glyphicon-trash"></i>
+        </a>
+    </div>
+    <small>
+        <em class="text-muted">Posted on {{patient.birthDate | date:'mediumDate'}} by {{patient.fullName}}</em>
+    </small>
 </section>
+

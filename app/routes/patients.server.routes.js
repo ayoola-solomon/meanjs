@@ -6,14 +6,16 @@ module.exports = function(app) {
 
 	// Patients Routes
 	app.route('/patients')
-		.get(patients.list)
+		.get(users.requiresLogin, patients.list)
 		.post(users.requiresLogin, patients.create);
-	
-	app.route('/patients/:patientId')
-		.get(patients.read)
-		.put(users.requiresLogin, patients.hasAuthorization, patients.update)
-	    .delete(users.requiresLogin, patients.hasAuthorization, patients.delete);
 
-	// Finish by binding the Patient middleware
-	app.param('patientId', patients.patientByID);
+
+    app.route('/patients/:patientId')
+        .get(patients.read)
+        .put(users.requiresLogin, patients.update)
+        .delete(users.requiresLogin,patients.delete);
+
+    // Finish by binding the Patient middleware
+    app.param('patientId', patients.patientByID);
+
 };

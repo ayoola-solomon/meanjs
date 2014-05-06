@@ -4,127 +4,194 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	Patient = mongoose.model('Patient'),
-	_ = require('lodash');
+    Patient = mongoose.model('Patient'),
+    _ = require('lodash');
 
-/**
- * Get the error message from error object
- */
-var getErrorMessage = function(err) {
-	var message = '';
+var http = require('http');
 
-	if (err.code) {
-		switch (err.code) {
-			case 11000:
-			case 11001:
-				message = 'Patient already exists';
-				break;
-			default:
-				message = 'Something went wrong';
-		}
-	} else {
-		for (var errName in err.errors) {
-			if (err.errors[errName].message) message = err.errors[errName].message;
-		}
-	}
+var getErrorMessage = function (err) {
+    var message = '';
 
-	return message;
+    if (err.code) {
+        switch (err.code) {
+            case 11000:
+            case 11001:
+                message = 'Patient already exists';
+                break;
+            default:
+                message = 'Something went wrong';
+        }
+    } else {
+        for (var errName in err.errors) {
+            if (err.errors[errName].message) message = err.errors[errName].message;
+        }
+    }
+
+    return message;
 };
 
-/**
- * Create a Patient
- */
-exports.create = function(req, res) {
-	var patient = new Patient(req.body);
-	patient.user = req.user;
+exports.create = function (req, res) {
+    var patient = req.body;
+    var jsonPatient = JSON.stringify(req.body);
 
-	patient.save(function(err) {
-		if (err) {
-			return res.send(400, {
-				message: getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(patient);
-		}
-	});
+    var postheaders = {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(jsonPatient, 'utf8')
+    };
+
+    var options = {
+        host: 'bhamdevtest001',
+        port: 8087,
+        path: '/bham/patients',
+        method: 'POST',
+        headers: postheaders
+    };
+
+    var reqPost = http.request(options, function (result) {
+        result.on('data', function (d) {
+        });
+        result.on('end', function () {
+            res.end();
+        });
+    });
+
+    reqPost.write(jsonPatient);
+    reqPost.end();
+    reqPost.on('error', function (e) {
+        console.error(e);
+    });
 };
 
-/**
- * Show the current Patient
- */
-exports.read = function(req, res) {
-	res.jsonp(req.patient);
+exports.read = function (req, res) {
+    console.log('opopo' + req.patientId);
+
+    var options = {
+        host: 'bhamdevtest001',
+        port: 8087,
+        path: '/bham/patients/' + req.patientId,
+        method: 'GET'
+    };
+
+    var reqGet = http.get(options, function (result) {
+        result.on('data', function (d) {
+            console.info('GET result:\n');
+            process.stdout.write(d);
+            console.info('\n\nCall completed');
+            res.write(d);
+        });
+        result.on('end', function () {
+            res.end();
+        });
+    });
+
+    reqGet.end();
+    reqGet.on('error', function (e) {
+        console.error(e);
+    });
 };
 
-/**
- * Update a Patient
- */
-exports.update = function(req, res) {
-	var patient = req.patient;
+exports.update = function (req, res) {
+    var patient = req.body;
+    var jsonPatient = JSON.stringify(req.body);
+    var postheaders = {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(jsonPatient, 'utf8')
+    };
 
-	patient = _.extend(patient, req.body);
+    var options = {
+        host: 'bhamdevtest001',
+        port: 8087,
+        path: '/bham/patients/' + patient.id,
+        method: 'PUT',
+        headers: postheaders
+    };
 
-	patient.save(function(err) {
-		if (err) {
-			return res.send(400, {
-				message: getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(patient);
-		}
-	});
+    var reqPost = http.request(options, function (result) {
+        result.on('data', function (d) {
+            console.info('Post result:\n');
+            //process.stdout.write(d);
+            console.info('\n\nCall completed');
+            //res.write(d);
+
+        });
+        result.on('end', function () {
+            res.end();
+        });
+    });
+
+    reqPost.write(jsonPatient);
+    reqPost.end();
+    reqPost.on('error', function (e) {
+        console.error(e);
+    });
+
 };
 
-/**
- * Delete an Patient
- */
-exports.delete = function(req, res) {
-	var patient = req.patient;
+exports.delete = function (req, res) {
+    var postheaders = {
+        'Content-Type': 'application/json'
+    };
 
-	patient.remove(function(err) {
-		if (err) {
-			return res.send(400, {
-				message: getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(patient);
-		}
-	});
+    var options = {
+        host: 'bhamdevtest001',
+        port: 8087,
+        path: '/bham/patients/' + req.patientId,
+        method: 'DELETE',
+        headers: postheaders
+    };
+
+    var reqPost = http.request(options, function (result) {
+        result.on('data', function (d) {
+            console.info('Post result:\n');
+            console.info('\n\nCall completed');
+        });
+        result.on('end', function () {
+            res.end();
+        });
+    });
+    reqPost.end();
+    reqPost.on('error', function (e) {
+        console.error(e);
+    });
 };
 
 /**
  * List of Patients
  */
-exports.list = function(req, res) {
-	Patient.find().sort('-created').populate('user', 'displayName').exec(function(err, patients) {
-		if (err) {
-			return res.send(400, {
-				message: getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(patients);
-		}
-	});
+exports.list = function (req, res) {
+    var options = {
+        host: 'bhamdevtest001',
+        port: 8087,
+        path: '/bham/patients',
+        method: 'GET'
+    };
+
+    var reqGet = http.get(options, function (result) {
+        result.on('data', function (d) {
+            console.info('GET result:\n');
+            //process.stdout.write(d);
+            console.info('\n\nCall completed');
+            res.write(d);
+        });
+        result.on('end', function () {
+            res.end();
+        });
+    });
+
+    reqGet.end();
+    reqGet.on('error', function (e) {
+        console.error(e);
+    });
 };
 
-/**
- * Patient middleware
- */
-exports.patientByID = function(req, res, next, id) {
-	Patient.findById(id).populate('user', 'displayName').exec(function(err, patient) {
-		if (err) return next(err);
-		if (!patient) return next(new Error('Failed to load Patient ' + id));
-		req.patient = patient;
-		next();
-	});
+exports.patientByID = function (req, res, next, id) {
+    req.patientId = id;
+    next();
 };
 
-/**
- * Patient authorization middleware
- */
-exports.hasAuthorization = function(req, res, next) {
-	if (req.patient.user.id !== req.user.id) {
-		return res.send(403, 'User is not authorized');
-	}
-	next();
+exports.hasAuthorization = function (req, res, next) {
+    if (req.patient.user.id !== req.user.id) {
+        return res.send(403, 'User is not authorized');
+    }
+    next();
 };
