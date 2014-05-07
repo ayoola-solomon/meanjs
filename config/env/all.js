@@ -15,8 +15,10 @@ module.exports = {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.css',
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+                'public/lib/nvd3/nv.d3.css'
 			],
 			js: [
+                'public/lib/jquery/dist/jquery.js',
 				'public/lib/angular/angular.js',
 				'public/lib/angular-resource/angular-resource.js', 
 				'public/lib/angular-cookies/angular-cookies.js',  
@@ -25,7 +27,11 @@ module.exports = {
 				'public/lib/angular-sanitize/angular-sanitize.js', 
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
-				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js'
+				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+                'public/lib/angular-tree-control/angular-tree-control.js',
+                'public/lib/d3/d3.js',
+                'public/lib/nvd3/nv.d3.js',
+                'public/lib/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js'
 			]
 		},
 		css: [

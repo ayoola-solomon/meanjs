@@ -32,9 +32,39 @@
 	<!-- Fav Icon -->
 	<link href="/modules/core/img/brand/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
+    <!-- ACE STYLES-->
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css" />
+
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="/assets/css/font-awesome-ie7.min.css" />
+    <![endif]-->
+
+    <!-- page specific plugin styles -->
+
+    <link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.full.min.css" />
+    <link rel="stylesheet" href="/assets/css/datepicker.css" />
+
+    <!-- fonts -->
+
+    <link rel="stylesheet" href="/assets/css/ace-fonts.css" />
+
+    <!-- ace styles -->
+
+    <link rel="stylesheet" href="/assets/css/ace.min.css" />
+    <link rel="stylesheet" href="/assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="/assets/css/ace-skins.min.css" />
+
+    <!-- END ACE STYLES-->
+
 	<!--Application CSS Files-->
 	{% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">
 	{% endfor %}
+
+    <link rel="stylesheet"  type="text/css" href="/assets/css/tree-control.css" />
+
+    <!-- ace settings handler -->
+
+    <script src="/assets/js/ace-extra.min.js"></script>
 
 	<!-- HTML5 Shim -->
 	<!--[if lt IE 9]>
@@ -58,6 +88,43 @@
 	<!--Application JavaScript Files-->
 	{% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>
 	{% endfor %} 
+
+
+    <!-- ACE JS FIELDS-->
+
+
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/typeahead-bs2.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+
+    <!--[if lte IE 8]>
+    <script src="/assets/js/excanvas.min.js"></script>
+    <![endif]-->
+
+    <!--
+    Commented this custom jquery-ui template
+    <script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+    -->
+
+    <script src="/assets/js/jquery-ui-1.10.3.full.min.js"></script>
+    <script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
+    <script src="/assets/js/jquery.slimscroll.min.js"></script>
+    <script src="/assets/js/jquery.easy-pie-chart.min.js"></script>
+    <script src="/assets/js/jquery.sparkline.min.js"></script>
+
+    <script src="/assets/js/flot/jquery.flot.min.js"></script>
+    <script src="/assets/js/flot/jquery.flot.pie.min.js"></script>
+    <script src="/assets/js/flot/jquery.flot.resize.min.js"></script>
+
+    <script src="/assets/js/date-time/bootstrap-datepicker.min.js"></script>
+
+    <!-- ace scripts -->
+
+    <script src="/assets/js/ace-elements.min.js"></script>
+    <script src="/assets/js/ace.min.js"></script>
+
+    <!-- END ACE JS FIELDS-->
 
 	{% if process.env.NODE_ENV === 'development' %}
 	<!--Livereload script rendered -->
