@@ -4,7 +4,9 @@
  */
 var init = require('./config/init')(),
 	config = require('./config/config'),
-	mongoose = require('mongoose');
+	mongoose = require('mongoose'),
+    https = require('https'),
+    fs = require('fs');
 
 /**
  * Main application entry file.
@@ -21,7 +23,14 @@ var app = require('./config/express')(db);
 require('./config/passport')();
 
 // Start the app by listening on <port>
-app.listen(config.port);
+var privateKey = fs.readFileSync('./key.pem');
+var certificate = fs.readFileSync('./key-cert.pem');
+
+var credentials = {key: privateKey, cert: certificate};
+
+https.createServer(credentials, app).listen(config.port);
+
+//app.listen(config.port);
 
 // Expose app
 exports = module.exports = app;
