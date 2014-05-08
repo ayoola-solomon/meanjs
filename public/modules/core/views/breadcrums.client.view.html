@@ -1,0 +1,35 @@
+<div class="breadcrumbs" id="breadcrumbs">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('breadcrumbs', 'fixed')
+        } catch (e) {
+        }
+    </script>
+
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home home-icon"></i>
+            <a href="#/patients">Home</a>
+        </li>
+        <li ng-repeat="breadcrumb in breadcrumbs()">
+             <span ng-if="$last">
+                   <span ng-bind="breadcrumb.name"></span>
+             </span>
+             <span ng-if="$index < ( breadcrumbs().length - 1 )">
+                   <a href="#{{breadcrumb.path}}"><span ng-bind="breadcrumb.name"></span></a>
+             </span>
+        </li>
+    </ul>
+    <!-- .breadcrumb -->
+
+    <div class="nav-search" id="nav-search">
+        <form class="form-search">
+			<span class="input-icon">
+				<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
+                       autocomplete="off"/>
+				<i class="icon-search nav-search-icon"></i>
+			</span>
+        </form>
+    </div>
+    <!-- #nav-search -->
+</div>
