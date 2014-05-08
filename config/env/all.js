@@ -13,9 +13,9 @@ module.exports = {
 	assets: {
 		lib: {
 			css: [
-				'public/lib/bootstrap/dist/css/bootstrap.css',
-				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-                'public/lib/nvd3/nv.d3.css'
+//				'public/lib/bootstrap/dist/css/bootstrap.css',
+//				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+//                'public/lib/nvd3/nv.d3.css'
 			],
 			js: [
                 'public/lib/jquery/dist/jquery.js',

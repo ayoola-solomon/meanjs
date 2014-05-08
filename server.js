@@ -23,8 +23,8 @@ var app = require('./config/express')(db);
 require('./config/passport')();
 
 // Start the app by listening on <port>
-var privateKey = fs.readFileSync('./key.pem');
-var certificate = fs.readFileSync('./key-cert.pem');
+var privateKey = fs.readFileSync('./certificate/key.pem');
+var certificate = fs.readFileSync('./certificate/key-cert.pem');
 
 var credentials = {key: privateKey, cert: certificate};
 

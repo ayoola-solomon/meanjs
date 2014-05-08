@@ -8,34 +8,34 @@ module.exports = function(grunt) {
             serverViews: {
                 files: ['app/views/**'],
                 options: {
-                    livereload: true,
+                    livereload: true
                 }
             },
             serverJS: {
                 files: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js'],
                 tasks: ['jshint'],
                 options: {
-                    livereload: true,
+                    livereload: true
                 }
             },
             clientViews: {
                 files: ['public/modules/**/views/*.html'],
                 options: {
-                    livereload: true,
+                    livereload: true
                 }
             },
             clientJS: {
                 files: ['public/js/**/*.js', 'public/modules/**/*.js'],
                 tasks: ['jshint'],
                 options: {
-                    livereload: true,
+                    livereload: true
                 }
             },
             clientCSS: {
                 files: ['public/**/css/*.css'],
                 tasks: ['csslint'],
                 options: {
-                    livereload: true,
+                    livereload: true
                 }
             }
         },
@@ -49,7 +49,7 @@ module.exports = function(grunt) {
         },
         csslint: {
             options: {
-                csslintrc: '.csslintrc',
+                csslintrc: '.csslintrc'
             },
             all: {
                 src: ['public/modules/**/css/*.css']
