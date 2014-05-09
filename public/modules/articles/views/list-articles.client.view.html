@@ -1,15 +1,60 @@
-<section data-ng-controller="ArticlesController" data-ng-init="find()">
-    <div class="page-header">
-        <h1>Articles</h1>
-    </div>
-    <div class="list-group">
-        <a data-ng-repeat="article in articles" data-ng-href="#!/articles/{{article._id}}" class="list-group-item">
-            <small class="list-group-item-text">{{article.created | date:'medium'}} / {{article.user.displayName}}</small>
-            <h4 class="list-group-item-heading">{{article.title}}</h4>
-            <p class="list-group-item-text">{{article.content}}</p>
+
+<div class="main-container" id="main-container" data-ng-controller="ArticlesController" data-ng-init="find()" >
+    <script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+    </script>
+
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+            <span class="menu-text"></span>
         </a>
-    </div>
-    <div class="alert alert-warning text-center" data-ng-hide="!articles.$resolved || articles.length">
-    	No articles yet, why don't you <a href="/#!/articles/create">create one</a>?
-    </div>
-</section>
+
+        <div data-ng-include="'/modules/core/views/sidenavbar.client.view.html'" ></div>
+
+        <div class="main-content">
+
+            <div data-ng-include="'/modules/core/views/breadcrums.client.view.html'" ></div>
+
+            <div class="page-content">
+                <div class="page-header">
+                    <h1>
+                        <span ng-bind="currentPage"> </span>
+                        <small>
+                            <i class="icon-double-angle-right"></i>
+                            overview
+                        </small>
+                    </h1>
+                </div><!-- /.page-header -->
+                <div class="row">
+                    <div class="col-xs-12">
+
+                        <div class="page-header">
+                            <h1>Articles</h1>
+                        </div>
+                        <div class="list-group">
+                            <a data-ng-repeat="article in articles" data-ng-href="#!/articles/{{article._id}}" class="list-group-item">
+                                <small class="list-group-item-text">{{article.created | date:'medium'}} / {{article.user.displayName}}</small>
+                                <h4 class="list-group-item-heading">{{article.title}}</h4>
+                                <p class="list-group-item-text">{{article.content}}</p>
+                            </a>
+                        </div>
+                        <div class="alert alert-warning text-center" data-ng-hide="!articles.$resolved || articles.length">
+                            No articles yet, why don't you <a href="/#!/articles/create">create one</a>?
+                        </div>
+
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.page-content -->
+
+        </div><!-- /.main-content -->
+
+        <!--<div data-ng-include="'/modules/core/views/acesettings.client.view.html'"></div>-->
+
+    </div><!-- /.main-container-inner -->
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
+</div><!-- /.main-container -->
+
+

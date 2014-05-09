@@ -23,24 +23,25 @@
                                     <div class="space-6"></div>
                                     <form data-ng-submit="signin()" autocomplete="off" >
                                         <fieldset>
-                                            <label class="block clearfix">
-                                            <span class="block input-icon input-icon-right">
-                                                <input type="text"  id="username" name="username" data-ng-model="credentials.username" class="form-control" placeholder="Username"/>
-                                                <i class="icon-user"></i>
-                                            </span>
+                                            <label class="block clearfix"> User Name
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="text"  id="username" name="username" data-ng-model="credentials.username" class="form-control" placeholder="Username"/>
+                                                    <i class="icon-user"></i>
+                                                </span>
                                             </label>
-                                            <label class="block clearfix">
-                                            <span class="block input-icon input-icon-right">
-                                                <input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password"/>
-                                                <i class="icon-lock"></i>
-                                            </span>
+                                            <label class="block clearfix"> Password
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password"/>
+                                                    <i class="icon-lock"></i>
+                                                </span>
                                             </label>
                                             <div class="space-10"></div>
                                             <div class="clearfix">
-                                                <a href="#!/signup"  class=" width-45 btn back-to-login-link">
+                                                <a href="#!/signup"  class=" width-45 pull-left btn btn-sm">
                                                     <i class="icon-arrow-left"></i>
                                                     Back to sign up
                                                 </a>
+
                                                 <button type="submit" class="width-45 pull-right btn btn-sm btn-success">
                                                     Login <i class="icon-arrow-right icon-on-right"></i>
                                                 </button>

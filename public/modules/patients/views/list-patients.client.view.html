@@ -1,15 +1,60 @@
-<section data-ng-controller="PatientsController" data-ng-init="find()">
-    <div class="page-header">
-        <h1>Patients</h1>
-    </div>
-    <div class="list-group">
-        <a data-ng-repeat="patient in patients" data-ng-href="#!/patients/{{patient.id}}" class="list-group-item">
-            <small class="list-group-item-text">{{patient.birthDate | date:'medium'}} / {{patient.fullName}}</small>
-            <h4 class="list-group-item-heading">{{patient.fullName}}</h4>
+
+<div class="main-container" id="main-container" data-ng-controller="PatientsController" data-ng-init="find()" >
+    <script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+    </script>
+
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+            <span class="menu-text"></span>
         </a>
-    </div>
-    <div class="alert alert-warning text-center" data-ng-hide="!patients.$resolved || patients.length">
-    	No Patients yet, why don't you <a href="/#!/patients/create">create one</a>?
-    </div>
-</section>
+
+        <div data-ng-include="'/modules/core/views/sidenavbar.client.view.html'" ></div>
+
+        <div class="main-content">
+
+            <div data-ng-include="'/modules/core/views/breadcrums.client.view.html'" ></div>
+
+            <div class="page-content">
+                <div class="page-header">
+                    <h1>
+                        <span ng-bind="currentPage"> </span>
+                        <small>
+                            <i class="icon-double-angle-right"></i>
+                            overview
+                        </small>
+                    </h1>
+                </div><!-- /.page-header -->
+                <div class="row">
+                    <div class="col-xs-12">
+
+                        <div class="page-header">
+                            <h1>Patients</h1>
+                        </div>
+                        <div class="list-group">
+                            <a data-ng-repeat="patient in patients" data-ng-href="#!/patients/{{patient.id}}" class="list-group-item">
+                                <small class="list-group-item-text">{{patient.birthDate | date:'medium'}} / {{patient.fullName}}</small>
+                                <h4 class="list-group-item-heading">{{patient.fullName}}</h4>
+                            </a>
+                        </div>
+                        <div class="alert alert-warning text-center" data-ng-hide="!patients.$resolved || patients.length">
+                            No Patients yet, why don't you <a href="/#!/patients/create">create one</a>?
+                        </div>
+
+
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.page-content -->
+
+        </div><!-- /.main-content -->
+
+        <!--<div data-ng-include="'/modules/core/views/acesettings.client.view.html'"></div>-->
+
+    </div><!-- /.main-container-inner -->
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
+</div><!-- /.main-container -->
+
 

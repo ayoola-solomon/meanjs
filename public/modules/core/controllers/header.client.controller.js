@@ -9,5 +9,7 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
 		$scope.toggleCollapsibleMenu = function() {
 			$scope.isCollapsed = !$scope.isCollapsed;
 		};
+
+        $scope.islogin = Authentication.user ? 'authenticated' : '';
 	}
 ]);

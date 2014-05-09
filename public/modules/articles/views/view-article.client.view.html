@@ -1,20 +1,65 @@
-<section data-ng-controller="ArticlesController" data-ng-init="findOne()">
-    <div class="page-header">
-        <h1>{{article.title}}</h1>
-    </div>
 
-    <div class="pull-right" data-ng-show="authentication.user._id == article.user._id">
-        <a class="btn btn-primary" href="/#!/articles/{{article._id}}/edit">
-            <i class="glyphicon glyphicon-edit"></i>
+<div class="main-container" id="main-container" data-ng-controller="ArticlesController" data-ng-init="findOne()" >
+    <script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+    </script>
+
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+            <span class="menu-text"></span>
         </a>
-        <a class="btn btn-primary" data-ng-click="remove();">
-            <i class="glyphicon glyphicon-trash"></i>
-        </a>
-    </div>
-    <small>
-        <em class="text-muted">Posted on {{article.created | date:'mediumDate'}} by {{article.user.displayName}}</em>
-    </small>
-    <p class="lead">
-        {{article.content}}
-    </p>
-</section>
+
+        <div data-ng-include="'/modules/core/views/sidenavbar.client.view.html'" ></div>
+
+        <div class="main-content">
+
+            <div data-ng-include="'/modules/core/views/breadcrums.client.view.html'" ></div>
+
+            <div class="page-content">
+                <div class="page-header">
+                    <h1>
+                        <span ng-bind="currentPage"> </span>
+                        <small>
+                            <i class="icon-double-angle-right"></i>
+                            overview
+                        </small>
+                    </h1>
+                </div><!-- /.page-header -->
+                <div class="row">
+                    <div class="col-xs-12">
+
+                        <div class="page-header">
+                            <h1>{{article.title}}</h1>
+                        </div>
+
+                        <div class="pull-right" data-ng-show="authentication.user._id == article.user._id">
+                            <a class="btn btn-primary" href="/#!/articles/{{article._id}}/edit">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
+                            <a class="btn btn-primary" data-ng-click="remove();">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </a>
+                        </div>
+                        <small>
+                            <em class="text-muted">Posted on {{article.created | date:'mediumDate'}} by {{article.user.displayName}}</em>
+                        </small>
+                        <p class="lead">
+                            {{article.content}}
+                        </p>
+
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.page-content -->
+
+        </div><!-- /.main-content -->
+
+        <!--<div data-ng-include="'/modules/core/views/acesettings.client.view.html'"></div>-->
+
+    </div><!-- /.main-container-inner -->
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
+</div><!-- /.main-container -->
+
+
