@@ -1,5 +1,5 @@
 
-<div class="main-container" id="main-container" data-ng-controller="PatientsController" data-ng-init="find()" >
+<div class="main-container" id="main-container" data-ng-controller="PatientListController" data-ng-init="find()" >
     <script type="text/javascript">
         try{ace.settings.check('main-container' , 'fixed')}catch(e){}
     </script>
@@ -28,19 +28,153 @@
                 <div class="row">
                     <div class="col-xs-12">
 
-                        <div class="page-header">
-                            <h1>Patients</h1>
-                        </div>
-                        <div class="list-group">
-                            <a data-ng-repeat="patient in patients" data-ng-href="#!/patients/{{patient.id}}" class="list-group-item">
-                                <small class="list-group-item-text">{{patient.birthDate | date:'medium'}} / {{patient.fullName}}</small>
-                                <h4 class="list-group-item-heading">{{patient.fullName}}</h4>
-                            </a>
-                        </div>
-                        <div class="alert alert-warning text-center" data-ng-hide="!patients.$resolved || patients.length">
-                            No Patients yet, why don't you <a href="/#!/patients/create">create one</a>?
+                        <!--Begin Old stuff-->
+
+                        <div class="table-responsive">
+                            <div class="table-header">
+                                &nbsp;
+                            </div>
+                            <div class="modal-footer no-margin-top" ng-hide="isDemographics">
+                                <div class="col-sm-3 " >
+                                    <div class="dataTables_info pull-left no-margi" ng-hide="isDemographics">
+                                        <label>
+                                            Display
+                                            <select size="1" ng-model="pageSize" ng-change="onPageSizeChange()">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select>
+                                            Records
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons field-height">
+                                        <label> Add patient</label> &nbsp;
+                                        <a class="blue" href="#!/patients/create">
+                                            <i class="icon-plus-sign purple bigger-130"></i>
+                                        </a>
+                                        <span > | </span>
+                                        <label>Search patients</label> &nbsp;&nbsp;
+                                        <select size="1" ng-model="searchBy" ng-change="onSearch()" >
+                                            <option value="">-- All columns --</option>
+                                            <option value="administrativeGenderCodeDisplayName">Gender</option>
+                                            <option value="addressPostalCode">Zipcode</option>
+                                        </select>
+                                        <input type="text" name="search" ng-model="criteria" ng-change="onSearch()" placeholder="Search table" size="15"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-body no-padding" >
+                                <table id="sample-table-1" class="table table-striped table-bordered table-hover no-bottom-margin">
+                                    <thead>
+                                    <tr>
+                                        <th ng-click="sort('medicalRecordNumber')">
+                                            Patient ID  &nbsp;<i ng-class="{'icon-chevron-up': isSortUp('medicalRecordNumber'), 'icon-chevron-down': isSortDown('medicalRecordNumber')}"></i>
+                                        </th>
+                                        <th ng-click="sort('fullName')">
+                                            Name &nbsp;<i ng-class="{'icon-chevron-up': isSortUp('fullName'), 'icon-chevron-down': isSortDown('fullName')}"></i>
+                                        </th>
+                                        <th ng-click="sort('administrativeGenderCode')">
+                                            Gender &nbsp; <i ng-class="{'icon-chevron-up': isSortUp('administrativeGenderCode'), 'icon-chevron-down': isSortDown('administrativeGenderCode')}"></i>
+                                        </th>
+                                        <th ng-click="sort('raceCode')">
+                                            Race &nbsp; <i ng-class="{'icon-chevron-up': isSortUp('raceCode'), 'icon-chevron-down': isSortDown('raceCode')}"></i>
+                                        </th>
+                                        <th ng-click="sort('birthDate')">
+                                            DOB &nbsp; <i ng-class="{'icon-chevron-up': isSortUp('birthDate'), 'icon-chevron-down': isSortDown('birthDate')}"></i>
+                                        </th>
+                                        <th ng-click="sort('addressPostalCode')">
+                                            Zipcode &nbsp; <i ng-class="{'icon-chevron-up': isSortUp('addressPostalCode'), 'icon-chevron-down': isSortDown('addressPostalCode')}"></i>
+                                        </th>
+                                        <th ng-click="sort('addressStateCode')">
+                                            State &nbsp;<i ng-class="{'icon-chevron-up': isSortUp('addressStateCode'), 'icon-chevron-down': isSortDown('addressStateCode')}"></i>
+                                        </th>
+                                        <th >Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!--<tr ng-repeat="patient in filteredPatients = ( patients |filter:composedCriteria | orderBy:natural(sortField):reverse )  | pagination:pageNo:pageSize">-->
+                                    <tr ng-repeat="patient in filteredPatients = ( patients |filter:composedCriteria | orderBy:sortField:reverse )  | pagination:pageNo:pageSize">
+                                        <td>
+                                            {{ patient.medicalRecordNumber }}
+                                        </td>
+                                        <td>
+                                            {{ patient.fullName}}
+                                        </td>
+                                        <td> {{ patient.administrativeGenderCodeDisplayName}}</td>
+                                        <td> {{ patient.raceCodeDisplayName }} </td>
+                                        <td> {{ patient.birthDate }}</td>
+                                        <td> {{ patient.addressPostalCode }}</td>
+                                        <td> {{ patient.addressStateCode }}</td>
+                                        <td>
+                                            <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                <show-patient patient="patient"  ></show-patient>
+                                                <a class="green" href="#/patients/edit/{{patient.id}}">
+                                                    <i class="icon-pencil bigger-130"></i>
+                                                </a>
+                                                <delete-patient patientid="{{ patient.id }}" name="{{ patient.fullName }}" ondelete="remove(patientId)" ng-hide="isDemographics"></delete-patient>
+                                                <a class="blue" href="#/patient/{{patient.id}}/treatmentplan">
+                                                    <i class="icon-stethoscope bigger-130"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr ng-show="filteredPatients.length == 0">
+                                        <td colspan="8" class="center"> No Patient found </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="modal-footer no-margin-top"  >
+                                    <div class="col-sm-6" ng-hide="isDemographics">
+                                         <span ng-show="filteredPatients.length > 0 " >
+                                            <div class="dataTables_info pull-left no-margi"> Showing {{startRecord}} to {{showPageSize}} of {{filteredPatients.length}} Patients </div>
+                                         </span>
+                                    </div>
+                                    <div class="col-sm-6" ng-hide="isDemographics">
+                                        <span ng-show="filteredPatients.length > 0" >
+                                            <ul class="pagination pull-right no-margin pagination-highlight">
+                                                <li class="prev" >
+                                                    <a ng-click="setActivePage(firstPage)">
+                                                        <i class="icon-double-angle-left"></i>
+                                                    </a>
+                                                </li>
+
+                                                <li ng-repeat="page in pages" ng-class="{'active': page==pageNo}">
+                                                    <a ng-click="setActivePage(page)" >{{page+1}}</a>
+                                                </li>
+
+                                                <li class="next" >
+                                                    <a ng-click="setActivePage(lastPage-1)">
+                                                        <i class="icon-double-angle-right"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
+                        <!--End New stuff-->
+
+                         <!--Old stuff-->
+
+                        <!--<div class="page-header">-->
+                            <!--<h1>Patients</h1>-->
+                        <!--</div>-->
+                        <!--<div class="list-group">-->
+                            <!--<a data-ng-repeat="patient in patients" data-ng-href="#!/patients/{{patient.id}}" class="list-group-item">-->
+                                <!--<small class="list-group-item-text">{{patient.birthDate | date:'medium'}} / {{patient.fullName}}</small>-->
+                                <!--<h4 class="list-group-item-heading">{{patient.fullName}}</h4>-->
+                            <!--</a>-->
+                        <!--</div>-->
+                        <!--<div class="alert alert-warning text-center" data-ng-hide="!patients.$resolved || patients.length">-->
+                            <!--No Patients yet, why don't you <a href="/#!/patients/create">create one</a>?-->
+                        <!--</div>-->
+
+                        <!--End Old stuff-->
 
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -58,3 +192,16 @@
 </div><!-- /.main-container -->
 
 
+<div id="dialog-confirm" class="hide">
+    <div class="alert alert-info bigger-110">
+        <span id="dialog-confirm-msg"></span>
+    </div>
+    <div class="space-6"></div>
+    <p class="bigger-110 bolder center grey">
+        <i class="icon-hand-right blue bigger-120"></i>
+        Are you sure?
+    </p>
+</div><!-- #dialog-delete-patient -->
+
+<div id="dialog-patient-details" class="hide" >
+</div><!-- #dialog-patient-details -->

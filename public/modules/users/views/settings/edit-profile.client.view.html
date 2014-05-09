@@ -28,9 +28,326 @@
                 <div class="row">
                     <div class="col-xs-12">
 
-                        <div class="longin-layout" >
-                            <div class="row">
+                        <!--<div class="longin-layout" >-->
+                            <!--<div class="row">-->
 
+                            <!--<form novalidate name="caremanagerForm" class="formValidation form-horizontal">-->
+
+                                <!--<div class="tabbable">-->
+
+                                    <!--<ul class="nav nav-tabs padding-16">-->
+                                        <!--<li ng-class="{'active' : activeTab === 'basic' }">-->
+                                            <!--<a data-toggle="tab" class="tab selected" rel="tab1" ng-click="switchTabTo('basic')">-->
+                                                <!--<i class="blue icon-info bigger-125"></i>-->
+                                                <!--Basic Info-->
+                                            <!--</a>-->
+                                        <!--</li>-->
+
+                                        <!--<li ng-class="{'active' : activeTab === 'contact'}">-->
+                                            <!--<a data-toggle="tab" class="tab" rel="tab2" ng-click="switchTabTo('contact')">-->
+                                                <!--<i class="blue icon-envelope-alt bigger-125"></i>-->
+                                                <!--Contact-->
+                                            <!--</a>-->
+                                        <!--</li>-->
+
+                                        <!--<li ng-class="{'active' : activeTab === 'password' }">-->
+                                            <!--<a data-toggle="tab" class="tab" rel="tab3" ng-click="switchTabTo('password')">-->
+                                                <!--<i class="blue icon-key bigger-125"></i>-->
+                                                <!--Password-->
+                                            <!--</a>-->
+                                        <!--</li>-->
+                                    <!--</ul>-->
+
+                                    <!--<div class="tab-content profile-edit-tab-content">-->
+
+                                        <!--<div id="tab1" class="tabContent selected" ng-show="activeTab === 'basic'">-->
+                                            <!--<h4 class="header blue bolder smaller">General</h4>-->
+
+                                            <!--<div class="row">-->
+                                                <!--&lt;!&ndash;Avatar Picture&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<div class="col-xs-12 col-sm-4">&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<input type="file" />&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<span class="ace-file-container" data-title="Change avatar">&ndash;&gt;-->
+                                                <!--&lt;!&ndash;::before&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<span class="ace-file-name" data-title="No File..."&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<i class="ace-icon ace-icon fa fa-picture-o">&ndash;&gt;-->
+                                                <!--&lt;!&ndash;::before&ndash;&gt;-->
+                                                <!--&lt;!&ndash;</i>&ndash;&gt;-->
+                                                <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                                <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                                                <!--&lt;!&ndash;<div class="vspace-xs"></div>&ndash;&gt;-->
+
+                                                <!--<div class="col-xs-8 col-sm-12">-->
+                                                    <!--<div class="form-group">-->
+                                                        <!--<label class="col-sm-4 control-label no-padding-right" for="username">Username</label>-->
+                                                        <!--<div class="col-sm-8">-->
+                                                            <!--<input type="text" name="username" ng-model="caremanager.username"  ng-minlength="7" ng-maxlength="30" required placeholder="Username" />-->
+                                                            <!--<span ng-show="caremanagerForm.username.$error.required" class="common-form-error">Required!</span>-->
+                                                            <!--<span ng-show="caremanagerForm.username.$error.minlength" class="common-form-error">Username should be atleast 7 characters </span>-->
+                                                            <!--<span ng-show="caremanagerForm.username.$error.maxlength" class="common-form-error">First name should be less than 30 characters </span>-->
+                                                        <!--</div>-->
+                                                    <!--</div>-->
+
+                                                    <!--<div class="space-4"></div>-->
+
+                                                    <!--<div class="form-group">-->
+                                                        <!--<label class="col-sm-4 control-label no-padding-right" for="prefix">Prefix</label>-->
+                                                        <!--<div class="col-sm-8">-->
+                                                            <!--<input type="text" name="prefix" ng-model="caremanager.namePrefix"  ng-minlength="2" ng-maxlength="4" required placeholder="Prefix" />-->
+                                                            <!--<span ng-show="caremanagerForm.prefix.$error.required" class="common-form-error">Required!</span>-->
+                                                            <!--<span ng-show="caremanagerForm.prefix.$error.minlength" class="common-form-error">Prefix should be atleast 2 characters </span>-->
+                                                            <!--<span ng-show="caremanagerForm.prefix.$error.maxlength" class="common-form-error">Prefix name should be less than 4 characters </span>-->
+                                                        <!--</div>-->
+                                                    <!--</div>-->
+
+                                                    <!--<div class="space-4"></div>-->
+
+                                                    <!--<div class="form-group">-->
+                                                        <!--<label class="col-sm-4 control-label no-padding-right" for="firstname">Firstname</label>-->
+                                                        <!--<div class="col-sm-8">-->
+                                                            <!--<input type="text" name="firstname"  ng-model="caremanager.firstName"  ng-minlength="2" ng-maxlength="30" required placeholder="First Name"/>-->
+                                                            <!--<span ng-show="caremanagerForm.firstname.$error.required" class="common-form-error">Required!</span>-->
+                                                            <!--<span ng-show="caremanagerForm.firstname.$error.minlength" class="common-form-error">First name should be atleast 2 characters </span>-->
+                                                            <!--<span ng-show="caremanagerForm.firstname.$error.maxlength" class="common-form-error">First name should be less than 30 characters </span>-->
+                                                        <!--</div>-->
+                                                    <!--</div>-->
+
+                                                    <!--<div class="space-4"></div>-->
+
+                                                    <!--<div class="form-group">-->
+                                                        <!--<label class="col-sm-4 control-label no-padding-right" for="lastname">Last Name</label>-->
+                                                        <!--<div class="col-sm-8">-->
+                                                            <!--<input class="col-xs-4 col-sm-2" type="text" id="lastname"  ng-model="caremanager.lastName"  ng-minlength="2" ng-maxlength="30" required placeholder="Last Name"/>-->
+                                                            <!--<span ng-show="caremanagerForm.lastname.$error.required" class="common-form-error">Required!</span>-->
+                                                            <!--<span ng-show="caremanagerForm.lastname.$error.minlength" class="common-form-error">Last name should be atleast 2 characters </span>-->
+                                                            <!--<span ng-show="caremanagerForm.lastname.$error.maxlength" class="common-form-error">Last name should be less than 30 characters </span>-->
+                                                        <!--</div>-->
+                                                    <!--</div>-->
+
+                                                    <!--<div class="space-4"></div>-->
+
+                                                    <!--<div class="form-group">-->
+                                                        <!--<label class="col-sm-4 control-label no-padding-right" for="middlename">Middle Name</label>-->
+                                                        <!--<div class="col-sm-8">-->
+                                                            <!--<input class="col-xs-4 col-sm-2" type="text" id="middlename"  ng-model="caremanager.middleName" placeholder="Middle Name"/>-->
+                                                        <!--</div>-->
+                                                    <!--</div>-->
+
+                                                    <!--<div class="space-4"></div>-->
+
+                                                    <!--<div class="form-group">-->
+                                                        <!--<label class="col-sm-4 control-label no-padding-right" for="suffix">Suffix</label>-->
+                                                        <!--<div class="col-sm-8">-->
+                                                            <!--<input class="col-xs-4 col-sm-2" type="text" id="suffix"  ng-model="caremanager.nameSuffix" placeholder="Suffix"/>-->
+                                                            <!--<span ng-show="caremanagerForm.suffix.$error.required" class="common-form-error">Required!</span>-->
+                                                        <!--</div>-->
+                                                    <!--</div>-->
+
+                                                <!--</div>-->
+                                            <!--</div>-->
+
+                                            <!--<hr />-->
+
+                                            <!--<div class="space-4"></div>-->
+
+                                            <!--<div class="form-group">-->
+                                                <!--<label class="col-sm-4 control-label no-padding-right">Gender</label>-->
+
+                                                <!--<div class="col-sm-4">-->
+
+                                                    <!--<label class="inline">-->
+                                                        <!--<input name="form-field-radio" type="radio" ng-model="caremanager.administrativeGenderCode" class="ace" value="M"/>-->
+                                                        <!--<span class="lbl"> Male</span>-->
+                                                    <!--</label>-->
+
+                                                    <!--<br />-->
+
+                                                    <!--<label class="inline">-->
+                                                        <!--<input name="form-field-radio" type="radio" ng-model="caremanager.administrativeGenderCode" class="ace" value="F"/>-->
+                                                        <!--<span class="lbl"> Female</span>-->
+                                                    <!--</label>-->
+
+                                                    <!--<br />-->
+
+                                                    <!--<label class="inline">-->
+                                                        <!--<input name="form-field-radio" type="radio" class="ace" />-->
+                                                        <!--<span class="lbl"> Not known</span>-->
+                                                    <!--</label>-->
+
+                                                    <!--<br />-->
+
+                                                    <!--<label class="inline">-->
+                                                        <!--<input name="form-field-radio" type="radio" class="ace" />-->
+                                                        <!--<span class="lbl"> Indeterminate</span>-->
+                                                    <!--</label>-->
+
+                                                <!--</div>-->
+                                            <!--</div>-->
+
+                                            <!--<div class="space-4"></div>-->
+
+                                            <!--<div class="form-group">-->
+                                                <!--<label class="col-sm-4 control-label no-padding-right" for="npi">National Provider Identifier (NPI)</label>-->
+                                                <!--<div class="col-sm-8">-->
+                                                    <!--<input type="text" name="npi" ng-model="caremanager.npi" required placeholder="NPI" value="NPI" />-->
+                                                    <!--<span ng-show="caremanagerForm.npi.$error.required" class="common-form-error">Required!</span>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+
+                                            <!--<div class="space-4"></div>-->
+
+                                            <!--<div class="form-group">-->
+                                                <!--<label class="col-sm-4 control-label no-padding-right" for="careManagerSpeciality">Speciality</label>-->
+                                                <!--<div class="col-sm-5">-->
+                                                    <!--<select ng-model="caremanager.providerTaxonomyCode" id="careManagerSpeciality" name="careManagerSpeciality" >-->
+                                                        <!--<option value="">-- choose speciality --</option>-->
+                                                        <!--<option ng-repeat="s in specialities" value="{{s.code}}" ng-selected="s.code == caremanager.providerTaxonomyCode">{{s.displayName}}</option>-->
+                                                    <!--</select>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+
+                                        <!--</div>-->
+
+                                        <!--<div id="tab2" class="tabContent selected" ng-show="activeTab === 'contact'">-->
+
+                                            <!--<div class="space"></div>-->
+                                            <!--<h4 class="header blue bolder smaller">Contact</h4>-->
+
+                                            <!--<div class="form-group">-->
+                                                <!--<label class="col-sm-3 control-label no-padding-right" for="email">Email</label>-->
+                                                <!--<div class="col-sm-9">-->
+                                                    <!--<span class="input-icon input-icon-right">-->
+                                                        <!--<input type="email" name="email" ng-model="caremanager.email" required/>-->
+                                                        <!--<i class="icon-envelope"></i>-->
+                                                    <!--</span>-->
+                                                    <!--<span ng-show="caremanagerForm.email.$error.required" class="common-form-error">Required!</span>-->
+                                                    <!--<span ng-show="caremanagerForm.email.$dirty && caremanagerForm.email.$error.email" class="common-form-error">Invalid email</span>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+
+                                            <!--<div class="space-4"></div>-->
+
+                                            <!--<div class="form-group">-->
+                                                <!--<label class="col-sm-3 control-label no-padding-right" for="form-field-website">Website</label>-->
+
+                                                <!--<div class="col-sm-9">-->
+                                                    <!--<span class="input-icon input-icon-right">-->
+                                                        <!--<input type="url" id="form-field-website" ng-model="caremanager.website" placeholder="http://www.bham.com/" />-->
+                                                        <!--<i class="icon-globe"></i>-->
+                                                    <!--</span>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+
+                                            <!--<div class="space-4"></div>-->
+
+                                            <!--<div class="form-group">-->
+                                                <!--<label class="col-sm-3 control-label no-padding-right" for="form-field-phone">Phone</label>-->
+
+                                                <!--<div class="col-sm-9">-->
+                                                    <!--<span class="input-icon input-icon-right">-->
+                                                        <!--<input class="input-medium input-mask-phone" type="text" id="form-field-phone" ng-model="caremanager.mailingAddressTelephoneNumber"/>-->
+                                                        <!--<i class="icon-phone icon-flip-horizontal"></i>-->
+                                                    <!--</span>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+
+                                            <!--<div class="space"></div>-->
+                                            <!--<h4 class="header blue bolder smaller">Mailing Address</h4>-->
+
+                                            <!--<div class="form-group">-->
+                                                <!--<label class="col-sm-3 control-label no-padding-right" for="line1">Line1</label>-->
+                                                <!--<div class="col-sm-9">-->
+                                                    <!--<input type="text" name="line1" ng-model="caremanager.firstLineMailingAddress"  placeholder="AddressLine1" />-->
+                                                    <!--&lt;!&ndash;<span ng-show="caremanagerForm.line1.$invalid">Required!</span>&ndash;&gt;-->
+                                                    <!--&lt;!&ndash;<span ng-show="showErrorOnCreate(caremanagerForm.line1, 'required')" class="common-form-error">This field is required</span>&ndash;&gt;-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+
+                                            <!--<div class="space-4"></div>-->
+
+                                            <!--<div class="form-group">-->
+                                                <!--<label class="col-sm-3 control-label no-padding-right" for="form-field-line2">Line2</label>-->
+
+                                                <!--<div class="col-sm-9">-->
+                                                    <!--<input class="col-xs-12 col-sm-4" type="text" id="form-field-line2" ng-model="caremanager.secondLineMailingAddress" placeholder="AddressLine2" value="AddressLine2" />-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+
+                                            <!--<div class="space-4"></div>-->
+
+                                            <!--<div class="form-group">-->
+                                                <!--<label class="col-sm-3 control-label no-padding-right" for="form-field-city">City</label>-->
+                                                <!--<div class="col-sm-4">-->
+                                                    <!--<input class="col-xs-12 col-sm-4" type="text" id="form-field-city" ng-model="caremanager.mailingAddressCityName" placeholder="City" value="Columbia" />-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+
+                                            <!--<div class="space-4"></div>-->
+
+                                            <!--<div class="form-group">-->
+                                                <!--<label class="col-sm-3 control-label no-padding-right" for="careManagerState">State</label>-->
+                                                <!--<div class="col-sm-4">-->
+                                                    <!--<select ng-model="caremanager.mailingAddressStateName" id="careManagerState" name="careManagerState" >-->
+                                                        <!--<option value="">-- choose state --</option>-->
+                                                        <!--<option ng-repeat="s in states" value="{{s.code}}" ng-selected="s.code == caremanager.mailingAddressStateName">{{s.displayName}}</option>-->
+                                                    <!--</select>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+
+                                            <!--<div class="space-4"></div>-->
+
+                                            <!--<div class="form-group">-->
+                                                <!--<label class="col-sm-3 control-label no-padding-right" for="form-field-postalcode">Postal Code</label>-->
+
+                                                <!--<div class="col-sm-4">-->
+                                                    <!--<input class="col-xs-12 col-sm-4" type="text" id="form-field-postalcode" ng-model="caremanager.mailingAddressPostalCode" placeholder="PostalCode" value="21030" />-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+
+                                        <!--</div>-->
+
+                                        <!--<div id="tab3" class="tabContent selected formValidation" ng-show="activeTab === 'password'">-->
+
+                                            <!--<div class="space-10"></div>-->
+
+                                            <!--<div class="form-group">-->
+                                                <!--<label class="col-sm-3 control-label no-padding-right" for="form-field-pass1">New Password</label>-->
+
+                                                <!--<div class="col-sm-9">-->
+                                                    <!--<input type="password" id="form-field-pass1" ng-model="caremanager.pass1"/>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+
+                                            <!--<div class="space-4"></div>-->
+
+                                            <!--<div class="form-group">-->
+                                                <!--<label class="col-sm-3 control-label no-padding-right" for="form-field-pass2">Confirm Password</label>-->
+
+                                                <!--<div class="col-sm-9">-->
+                                                    <!--<input type="password" id="form-field-pass2" ng-model="caremanager.pass2"/>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+
+                                    <!--</div>-->
+                                <!--&lt;!&ndash;<pre>{{toJSON(caremanagerForm)}}</pre>&ndash;&gt;-->
+                                <!--</div>-->
+
+                                <!--<div class="clearfix form-actions">-->
+                                    <!--<div class="col-md-offset-4 col-md-4">-->
+                                        <!--<button class="btn btn-info" type="button" ng-click="save(caremanager)" ng-disabled="caremanagerForm.$invalid">-->
+                                            <!--<i class="icon-ok bigger-110"></i>-->
+                                            <!--Save-->
+                                        <!--</button>-->
+                                        <!--<button class="btn" type="reset">-->
+                                            <!--<i class="icon-undo bigger-110"></i>-->
+                                            <!--Reset-->
+                                        <!--</button>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</form>-->
 
                                 <div class="col-sm-10 col-sm-offset-1">
                                     <div class="login-container">
@@ -90,7 +407,6 @@
                                         </div>
                                     </div>
                                 </div>
-
 
                             </div>
                         </div>

@@ -8,7 +8,19 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
 	function($locationProvider) {
 		$locationProvider.hashPrefix('!');
 	}
-]);
+])
+.config(function($provide) {
+    $provide.decorator('$state', function($delegate, $stateParams) {
+        $delegate.forceReload = function() {
+            return $delegate.go($delegate.current, $stateParams, {
+                reload: true,
+                inherit: false,
+                notify: true
+            });
+        };
+        return $delegate;
+    });
+});
 
 //Then define the init function for starting up the application
 angular.element(document).ready(function() {

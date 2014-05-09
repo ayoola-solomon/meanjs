@@ -1,5 +1,5 @@
 
-<div class="main-container" id="main-container" data-ng-controller="PatientsController" data-ng-init="find()" >
+<div class="main-container" id="main-container" data-ng-controller="PatientCreateController" data-ng-init="find()" >
     <script type="text/javascript">
         try{ace.settings.check('main-container' , 'fixed')}catch(e){}
     </script>
@@ -32,36 +32,144 @@
                             <h1>New Patient</h1>
                         </div>
                         <div class="col-md-12">
-                            <form class="form-horizontal" data-ng-submit="create()" novalidate>
-                                <fieldset>
-                                    <div class="form-group">
-                                        <label class="control-label" for="firstName">First Name</label>
 
-                                        <div class="controls">
-                                            <input type="text" data-ng-model="patient.firstName" id="firstName" class="form-control"
-                                                   placeholder="firstName" required>
+                            <!--Begin new stuff-->
+
+                            <div id="add-patient-form">
+                                <form novalidate class="form-horizontal field-height" name="patientForm" >
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label no-padding-right" for="patientMRN"> Patient ID </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" ng-model="patient.medicalRecordNumber" id="patientMRN" name="patientMRN" placeholder="Patient ID"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label no-padding-right" for="patientFirstName"> First Name </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" ng-model="patient.firstName" ng-minlength="2" id="patientFirstName" ng-maxlength="30" required name="patientFirstName" placeholder="Patient first name"/>
+                                            <span ng-show="showErrorOnCreate(patientForm.patientFirstName, 'required')" class="patient-form-error">This field is required</span>
+                                            <span ng-show="showErrorOnCreate(patientForm.patientFirstName, 'minlength')" class="patient-form-error">First name should be atleast 2 characters </span>
+                                            <span ng-show="showErrorOnCreate(patientForm.patientFirstName, 'maxlength')" class="patient-form-error">First name should be less than 30 characters </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label no-padding-right" for="patientLastName"> Last Name </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" ng-model="patient.lastName"  ng-minlength="2" ng-maxlength="30" id="patientLastName" required  name="patientLastName" placeholder="Patient last name"/>
+                                            <span ng-show="showErrorOnCreate(patientForm.patientLastName, 'required')" class="patient-form-error">This field is required</span>
+                                            <span ng-show="showErrorOnCreate(patientForm.patientLastName, 'minlength')" class="patient-form-error">Last name should be atleast 2 characters </span>
+                                            <span ng-show="showErrorOnCreate(patientForm.patientLastName, 'maxlength')" class="patient-form-error">Last name should be less than 30 characters </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label no-padding-right" > Gender</label>
+                                        <div class="col-sm-6 radio" >
+                                            <label >
+                                                <input type="radio"  ng-model="patient.administrativeGenderCode" class="ace" name="patientGender" value="M"/>
+                                                <span class="lbl"> Male </span>
+                                            </label>
+                                            <label >
+                                                <input type="radio"  ng-model="patient.administrativeGenderCode" class="ace" name="patientGender" value="F"/>
+                                                <span class="lbl"> Female </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label no-padding-right" for="patientRace">Race</label>
+                                        <div class="col-sm-6">
+                                            <select ng-model="patient.raceCode" name="patientRace" id="patientRace">
+                                                <option value="">-- choose race --</option>
+                                                <option ng-repeat="r in races" value="{{r.code}}" ng-selected="r.code == patient.raceCode">{{r.displayName}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label no-padding-right" for="patientDOB"> Date of Birth </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" id="patientDOB" ng-pattern="datePattern" datepicker ng-model="patient.birthDate"  name="patientDOB" placeholder="MM/DD/YYYY"/>
+                                            <span ng-show="patientForm.patientDOB.$error['pattern']" class="patient-form-error">Invalid date</span>
+                                            <span ng-show="showCompareDateError" class="patient-form-error">Date should not be in the future</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label no-padding-right" for="patientZipcode"> Zip code </label>
+                                        <div class="col-sm-6">
+                                            <input type="text" ng-model="patient.addressPostalCode"  id="patientZipcode" name="patientZipcode" placeholder="Patient zip code"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label no-padding-right" style="padding-right: 12px;" for="patientState"> State </label>
+                                        <div class="col-sm-6" >
+                                            <select ng-model="patient.addressStateCode" id="patientState" name="patientState" >
+                                                <option value="">-- choose state --</option>
+                                                <option ng-repeat="s in states" value="{{s.code}}" ng-selected="s.code == patient.addressStateCode">{{s.displayName}}</option>
+                                            </select>
                                         </div>
                                     </div>
 
+                                    <div class="clearfix form-actions">
+                                        <div class="col-sm-6 control-label no-padding-right no-padding-top">
+                                            <a class="btn" href="#/patients" ng-hide="isDemographics" >
+                                                <i class="icon-arrow-left bigger-110 "></i>
+                                                Back
+                                            </a>
+                                            <a class="btn" href="#/patient/{{selectedPatientId}}/demographics"  ng-hide="!isDemographics" >
+                                                <i class="icon-arrow-left bigger-110 "></i>
+                                                Back
+                                            </a>
+                                        </div>
 
-                                    <div class="form-group">
-                                        <label class="control-label" for="lastName">Last Name</label>
-
-                                        <div class="controls">
-                                            <input type="text" data-ng-model="patient.lastName" id="lastName" class="form-control"
-                                                   placeholder="lastName" required>
+                                        <div class="col-sm-6">
+                                            <a class="btn btn-info" type="button" ng-click="save(patient)" ng-disabled="!canSave()">
+                                                <i class="icon-ok bigger-110"></i>
+                                                Submit
+                                            </a>
                                         </div>
                                     </div>
 
+                                </form>
+                                <!--Form: <pre ng-bind="toJSON(patientForm)"></pre>-->
+                            </div>
 
-                                    <div class="form-group">
-                                        <input type="submit" class="btn btn-default">
-                                    </div>
-                                    <div data-ng-show="error" class="text-danger">
-                                        <strong>{{error}}</strong>
-                                    </div>
-                                </fieldset>
-                            </form>
+                            <!--End new stuff-->
+
+
+                            <!--Begin old stuff-->
+
+                            <!--<form class="form-horizontal" data-ng-submit="create()" novalidate>-->
+                                <!--<fieldset>-->
+                                    <!--<div class="form-group">-->
+                                        <!--<label class="control-label" for="firstName">First Name</label>-->
+
+                                        <!--<div class="controls">-->
+                                            <!--<input type="text" data-ng-model="patient.firstName" id="firstName" class="form-control"-->
+                                                   <!--placeholder="firstName" required>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+
+
+                                    <!--<div class="form-group">-->
+                                        <!--<label class="control-label" for="lastName">Last Name</label>-->
+
+                                        <!--<div class="controls">-->
+                                            <!--<input type="text" data-ng-model="patient.lastName" id="lastName" class="form-control"-->
+                                                   <!--placeholder="lastName" required>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+
+
+                                    <!--<div class="form-group">-->
+                                        <!--<input type="submit" class="btn btn-default">-->
+                                    <!--</div>-->
+                                    <!--<div data-ng-show="error" class="text-danger">-->
+                                        <!--<strong>{{error}}</strong>-->
+                                    <!--</div>-->
+                                <!--</fieldset>-->
+                            <!--</form>-->
+                            <!---->
+
+                            <!--End old stuff-->
+
                         </div>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
